@@ -1,36 +1,25 @@
-function FilterButton({ children, isClicked, toFilter, handlerFilter }) {
-  if (isClicked) {
+function FilterButtons({ filter, setFilter }) {
+  function FilterButton({ children, isClicked, toFilter }) {
     return (
       <button 
-        className="filter-button clicked" 
-        onClick={() => handlerFilter(toFilter)}
+        className={"filter-button" + (isClicked ? " clicked" : "")}
+        onClick={() => setFilter(toFilter)}
       >
         {children}
       </button>
-    );
-  } else {
-    return (
-      <button
-        className="filter-button"
-        onClick={() => handlerFilter(toFilter)}
-      >
-        {children}
-      </button>
-    );
+    )
   }
-}
 
-function FilterButtons({ filter, handlerFilter }) {
   return (
     <div className="filter">
       筛选：
-      <FilterButton isClicked={filter==0} toFilter={0} handlerFilter={handlerFilter}>
+      <FilterButton isClicked={filter===0} toFilter={0}>
         全部
       </FilterButton>
-      <FilterButton isClicked={filter==1} toFilter={1} handlerFilter={handlerFilter}>
+      <FilterButton isClicked={filter===1} toFilter={1}>
         未完成
       </FilterButton>
-      <FilterButton isClicked={filter==2} toFilter={2} handlerFilter={handlerFilter}>
+      <FilterButton isClicked={filter===2} toFilter={2}>
         已完成
       </FilterButton>
     </div>
