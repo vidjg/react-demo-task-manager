@@ -3,14 +3,16 @@ import './App.css';
 import { useState } from 'react';
 import AddTaskForm from './components/AddTaskForm';
 import TaskList from './components/TaskList';
+import FilterButtons from './components/FilterButtons';
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, text: "学习React", completed: false },
-    { id: 2, text: "构建任务管理应用", completed: true },
-    { id: 3, text: "部署到Vercel", completed: false },
+    { id: 1, text: "学习React", completed: false, hide: false },
+    { id: 2, text: "构建任务管理应用", completed: true, hide: false },
+    { id: 3, text: "部署到Vercel", completed: false, hide: false },
   ])
   const [maxId, setMaxId] = useState(3);
+  const [filter, setFilter] = useState(0);
 
   function handleAddTask() {
     const input_text = document.getElementById("task-name").value;
@@ -31,13 +33,35 @@ function App() {
   function handleTaskStatus(idx) {
     setTasks(tasks.map(
       task => task.id == idx ? {...task, completed: !task.completed} : task
-    ))
+    ));
   }
 
   function handleTaskDelete(idx) {
     setTasks(tasks.filter(
       task => task.id !== idx
-    ))
+    ));
+  }
+
+  function handleTaskFilter(toFilter) {
+    switch(toFilter) {
+      case 0:
+        setFilter(0);
+        setTasks(tasks.map(
+          task => task.hide ? {...task, hide: false} : task
+        ));
+        break;
+      case 1:
+        setFilter(1);
+        setTasks(tasks.map(
+          task => task.completed ? {...task, hide: true} : {...task, hide: false}
+        ));
+        break;
+      case 2:
+        setFilter(2);
+        setTasks(tasks.map(
+          task => !task.completed ? {...task, hide: true} : {...task, hide: false}
+        ));
+    }
   }
 
   return (
@@ -57,6 +81,7 @@ function App() {
         </a>
       </header> */}
       <AddTaskForm handlerAddTask={handleAddTask}/>
+      <FilterButtons filter={filter} handlerFilter={handleTaskFilter}/>
       <TaskList 
         tasks={tasks} 
         handlerStatus={handleTaskStatus}

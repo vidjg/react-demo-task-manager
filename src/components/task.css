@@ -1,6 +1,6 @@
 .task-item {
     display: flex;
-    width: 600px;
+    width: 640px;
     padding: 5px;
     border: 1px solid #ccc;
     margin-left: 10px;
@@ -31,4 +31,22 @@ input#task-name {
 
 .add-task-form > button {
     margin-left: 5px;
+}
+
+.filter {
+    text-align: right;
+    width: 640px;
+}
+
+.filter-button {
+    margin-left: 5px;
+}
+
+.filter-button:active {
+    background-color: cadetblue;
+}
+
+button.clicked {
+    background-color: cadetblue;
+    /* cursor: not-allowed; */
 }
