@@ -8,6 +8,10 @@
     margin-top: 5px;
 }
 
+.task-item.completed {
+    background-color:#ddd;
+}
+
 .task-name {
     width: 70%;
 }

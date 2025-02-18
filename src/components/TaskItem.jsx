@@ -2,7 +2,7 @@ import "./task.css";
 
 function TaskItem({ id, name, completed, handlerStatus, handlerDelete }) {
   return (
-    <div className="task-item">
+    <div className={"task-item" + (completed ? " completed" : "")}>
       <div className="task-name">{name}</div>
       <div className="task-status">
         已完成：
